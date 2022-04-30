@@ -1,5 +1,5 @@
 import React from 'react';
-import './Sidebar.css';
+import './Sidebar.less';
 import { Input } from 'antd';
 
 const { Search } = Input;

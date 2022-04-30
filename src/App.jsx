@@ -12,7 +12,7 @@ import ReactFlow, {
 import Sidebar from './Components/Sidebar/Sidebar';
 import ConfigCard from './Components/ConfigCard/ConfigCard';
 import loadData from './Utils/loadData';
-import './App.css';
+import './App.less';
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
@@ -30,6 +30,18 @@ const Flow = () => {
       <div>{label}</div>
     )
   }
+  const getSourcePosition = (type) => {
+    if (type === 'input' || type === 'default') {
+      return 'right'
+    }
+    return 'left'
+  }
+  const getTargetPosition = (type) => {
+    if (type === 'output' || type === 'default') {
+      return 'left'
+    }
+    return ''
+  }
   const onNodeClick = useCallback((event, node) => {
     console.log(node)
     setNode(node)
@@ -41,7 +53,6 @@ const Flow = () => {
     }
     return setEdges((eds) => addEdge(_params, eds))
   }, []);
-
   const onDragOver = useCallback((event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
@@ -59,24 +70,12 @@ const Flow = () => {
         x: event.clientX - reactFlowBounds.left,
         y: event.clientY - reactFlowBounds.top,
       });
-      const getSourcePosition = () => {
-        if (type === 'input' || type === 'default') {
-          return 'right'
-        }
-        return 'left'
-      }
-      const getTargetPosition = () => {
-        if (type === 'output' || type === 'default') {
-          return 'left'
-        }
-        return ''
-      }
       const newNode = {
         id: getId(),
         type,
         position,
-        sourcePosition: getSourcePosition(),
-        targetPosition: getTargetPosition(),
+        sourcePosition: getSourcePosition(type),
+        targetPosition: getTargetPosition(type),
         data: {
           label: getLabel(label),
         },
