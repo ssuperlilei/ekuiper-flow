@@ -1,0 +1,35 @@
+aside {
+  color: #fff;
+}
+
+aside.config-card {
+  padding: 0;
+}
+
+.config-card .config-body {
+  padding: 0 12px;
+}
+
+.config-title {
+  margin-bottom: 24px;
+}
+
+.config-header {
+  height: 48px;
+  padding: 12px 24px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #495062;
+  display: flex;
+  justify-content: space-between;
+}
+
+.config-header a {
+  color: #fff;
+}
+.config-header a:hover {
+  color: #00B173;
+}
+
+.config-card .ant-btn-primary{
+  margin-top: 12px;
+}

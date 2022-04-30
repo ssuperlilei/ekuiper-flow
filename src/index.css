@@ -11,3 +11,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Input */
+.ant-input {
+  border-radius: 8px;
+  background: #333844;
+  color: #fff;
+  height: 32px;
+  border: 1px solid #495062;
+}
+.ant-input-group-addon {
+  background-color: #333844;
+  border-radius: 0 8px 8px 0;
+}
+.ant-input-search > .ant-input-group > .ant-input-group-addon:last-child .ant-input-search-button:not(.ant-btn-primary) {
+  background-color: #333844;
+  border: none;
+  color: #fff;
+  border-radius: 0 8px 8px 0;
+}
+.ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input, .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:hover {
+  background-color: #333844;
+}
+
+/* Form */
+.ant-form-item-label > label {
+  color: #d1d3d7;
+}
+.ant-form-item {
+  margin-bottom: 12px;
+}
+.ant-form-vertical .ant-form-item-label, .ant-col-24.ant-form-item-label, .ant-col-xl-24.ant-form-item-label {
+  padding: 0px;
+}
+
+/* Button */
+.ant-btn-primary {
+  background-color: #00B173;
+  border-color: #00B173;
+}
