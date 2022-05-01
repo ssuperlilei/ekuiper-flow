@@ -1,3 +1,3 @@
-const chartData = {}
+const chartData = {};
 
 export default chartData;

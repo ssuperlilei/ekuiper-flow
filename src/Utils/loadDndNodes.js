@@ -36,10 +36,10 @@ const loadDndNodes = () => {
       type: 'def',
       group: 'function',
     },
-  ]
+  ];
   return {
     dndNodes,
-  }
-}
+  };
+};
 
 export default loadDndNodes;

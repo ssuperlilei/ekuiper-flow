@@ -5,7 +5,7 @@ const loadData = () => {
       type: 'input',
       sourcePosition: 'right',
       data: { label: 'ZeroMQ' },
-       position: { x: 0, y: 80 },
+      position: { x: 0, y: 80 },
     },
 
     {
@@ -13,7 +13,7 @@ const loadData = () => {
       data: { label: '滤波-IIR 滤波' },
       sourcePosition: 'right',
       targetPosition: 'left',
-      position: { x: 250, y: 80},
+      position: { x: 250, y: 80 },
     },
     {
       id: '3',
@@ -31,7 +31,7 @@ const loadData = () => {
   return {
     initialNodes,
     initialEdges,
-  }
-}
+  };
+};
 
 export default loadData;

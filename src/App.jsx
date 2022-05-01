@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useCallback } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
@@ -21,37 +20,35 @@ const { initialEdges, initialNodes } = loadData();
 
 const Flow = () => {
   const reactFlowWrapper = useRef(null);
-  const [node, setNode] = useState(null)
+  const [node, setNode] = useState(null);
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const getLabel = (label) => {
-    return (
-      <div>{label}</div>
-    )
-  }
+    return <div>{label}</div>;
+  };
   const getSourcePosition = (type) => {
     if (type === 'input' || type === 'default') {
-      return 'right'
+      return 'right';
     }
-    return 'left'
-  }
+    return 'left';
+  };
   const getTargetPosition = (type) => {
     if (type === 'output' || type === 'default') {
-      return 'left'
+      return 'left';
     }
-    return ''
-  }
+    return '';
+  };
   const onNodeClick = useCallback((event, node) => {
-    console.log(node)
-    setNode(node)
+    console.log(node);
+    setNode(node);
   });
   const onConnect = useCallback((params) => {
     const _params = {
       animated: true,
       ...params,
-    }
-    return setEdges((eds) => addEdge(_params, eds))
+    };
+    return setEdges((eds) => addEdge(_params, eds));
   }, []);
   const onDragOver = useCallback((event) => {
     event.preventDefault();
@@ -82,7 +79,7 @@ const Flow = () => {
       };
       setNodes((nds) => nds.concat(newNode));
     },
-    [reactFlowInstance]
+    [reactFlowInstance],
   );
 
   return (
@@ -102,7 +99,7 @@ const Flow = () => {
             onNodeClick={onNodeClick}
             fitView
           >
-             <MiniMap
+            <MiniMap
               maskColor="#555B69"
               nodeStrokeColor={(n) => {
                 if (n.style?.background) return n.style.background;

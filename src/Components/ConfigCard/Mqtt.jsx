@@ -11,7 +11,7 @@ const Mqtt = () => {
 
   return (
     <div>
-      <div className='config-title'>MQTT 配置</div>
+      <div className="config-title">MQTT 配置</div>
       <Form
         name="basic"
         labelCol={{ span: 24 }}
@@ -21,34 +21,19 @@ const Mqtt = () => {
         onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
-        <Form.Item
-          label="IP 地址"
-          name="host"
-        >
+        <Form.Item label="IP 地址" name="host">
           <Input />
         </Form.Item>
-        <Form.Item
-          label="端口"
-          name="port"
-        >
+        <Form.Item label="端口" name="port">
           <Input />
         </Form.Item>
-        <Form.Item
-          label="Username"
-          name="username"
-        >
+        <Form.Item label="Username" name="username">
           <Input />
         </Form.Item>
-         <Form.Item
-          label="Password"
-          name="password"
-        >
+        <Form.Item label="Password" name="password">
           <Input />
         </Form.Item>
-         <Form.Item
-          label="Topic"
-          name="topic"
-        >
+        <Form.Item label="Topic" name="topic">
           <Input />
         </Form.Item>
         <Form.Item wrapperCol={{ span: 24 }}>
@@ -61,4 +46,4 @@ const Mqtt = () => {
   );
 };
 
-export default Mqtt
+export default Mqtt;
