@@ -1,8 +1,26 @@
 const loadDndNodes = () => {
+  const groups = [
+    {
+      groupName: '数据源',
+      groupValue: 'source',
+    },
+    {
+      groupName: '数据目标',
+      groupValue: 'sink',
+    },
+    {
+      groupName: '自定义函数',
+      groupValue: 'function',
+    },
+    {
+      groupName: '图表展示',
+      groupValue: 'chart',
+    },
+  ];
   const dndNodes = [
     {
       label: 'ZeroMQ',
-      value: 'ZeroMQ',
+      value: 'zmq',
       type: 'input',
       group: 'source',
     },
@@ -19,6 +37,12 @@ const loadDndNodes = () => {
       group: 'sink',
     },
     {
+      label: 'Log',
+      value: 'log',
+      type: 'output',
+      group: 'sink',
+    },
+    {
       label: 'RMS 统计',
       value: 'rms',
       type: 'default',
@@ -27,17 +51,30 @@ const loadDndNodes = () => {
     {
       label: '滤波-IIR 滤波',
       value: 'iir',
-      type: 'def',
+      type: 'default',
       group: 'function',
     },
     {
       label: '频谱分析-功率谱',
       value: 'spectrum',
-      type: 'def',
+      type: 'default',
       group: 'function',
+    },
+    {
+      label: '折线图',
+      value: 'line',
+      type: 'output',
+      group: 'chart',
+    },
+    {
+      label: '热力图',
+      value: 'heatmap',
+      type: 'output',
+      group: 'chart',
     },
   ];
   return {
+    groups,
     dndNodes,
   };
 };
