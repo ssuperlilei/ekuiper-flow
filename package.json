@@ -22,7 +22,8 @@
     "test": "craco test",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json,less}' --config ./.prettierrc"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json,less}' --config ./.prettierrc",
+    "prepare": "husky install"
   },
   "eslintConfig": {
     "extends": [
@@ -47,10 +48,22 @@
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": ">=6",
+    "lint-staged": ">=10",
     "prettier": "^2.6.2"
   },
   "main": "index.js",
   "repository": "https://github.com/ysfscream/ekuiper-flow.git",
   "author": "ysfscream <894402575bt@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css,md,json,less}": [
+      "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json,less}' --config ./.prettierrc"
+    ]
+  }
 }
