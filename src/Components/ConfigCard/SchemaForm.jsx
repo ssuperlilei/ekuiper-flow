@@ -1,7 +1,10 @@
-import { Form, Input } from 'antd';
+import { Form, Input, Button } from 'antd';
 
 const SchemaForm = ({ node }) => {
-  console.log(node);
+  const [form] = Form.useForm();
+  const onFinish = (values) => {
+    node.data.configs = values;
+  };
   return (
     <Form
       name="basic"
@@ -9,9 +12,16 @@ const SchemaForm = ({ node }) => {
       wrapperCol={{ span: 24 }}
       initialValues={{ remember: true }}
       autoComplete="off"
+      form={form}
+      onFinish={onFinish}
     >
-      <Form.Item name="config">
+      <Form.Item name="test" label="Test">
         <Input />
+      </Form.Item>
+      <Form.Item>
+        <Button type="primary" size="small" htmlType="submit">
+          保存
+        </Button>
       </Form.Item>
     </Form>
   );
