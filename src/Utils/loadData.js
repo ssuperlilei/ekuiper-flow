@@ -4,13 +4,12 @@ const loadData = () => {
       id: '1',
       type: 'input',
       sourcePosition: 'right',
-      data: { label: 'ZeroMQ' },
+      data: { label: <div>ZeroMQ</div>, name: 'zmq' },
       position: { x: 0, y: 80 },
     },
-
     {
       id: '2',
-      data: { label: '滤波-IIR 滤波' },
+      data: { label: <div>滤波-IIR 滤波</div>, name: 'iir' },
       sourcePosition: 'right',
       targetPosition: 'left',
       position: { x: 250, y: 80 },
@@ -19,7 +18,7 @@ const loadData = () => {
       id: '3',
       type: 'output',
       targetPosition: 'left',
-      data: { label: 'MQTT' },
+      data: { label: <div>MQTT</div>, name: 'mqtt' },
       position: { x: 500, y: 80 },
     },
   ];

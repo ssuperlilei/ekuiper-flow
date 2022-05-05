@@ -40,7 +40,6 @@ const Flow = () => {
     return '';
   };
   const onNodeClick = useCallback((event, node) => {
-    console.log(node);
     setNode(node);
   });
   const onConnect = useCallback((params) => {
@@ -59,7 +58,8 @@ const Flow = () => {
       event.preventDefault();
       const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
       const type = event.dataTransfer.getData('getNodeType');
-      const label = event.dataTransfer.getData('getLabel');
+      const name = event.dataTransfer.getData('getNodeName');
+      const label = event.dataTransfer.getData('getNodeLabel');
       if (typeof type === 'undefined' || !type) {
         return;
       }
@@ -75,6 +75,8 @@ const Flow = () => {
         targetPosition: getTargetPosition(type),
         data: {
           label: getLabel(label),
+          name,
+          configs: {},
         },
       };
       setNodes((nds) => nds.concat(newNode));

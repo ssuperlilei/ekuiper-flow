@@ -6,9 +6,10 @@ import loadDndNodes from '../../Utils/loadDndNodes';
 const { Search } = Input;
 
 const Sidebar = () => {
-  const onDragStart = (event, nodeType, label) => {
-    event.dataTransfer.setData('getNodeType', nodeType);
-    event.dataTransfer.setData('getLabel', label);
+  const onDragStart = (event, node) => {
+    event.dataTransfer.setData('getNodeName', node.value);
+    event.dataTransfer.setData('getNodeLabel', node.label);
+    event.dataTransfer.setData('getNodeType', node.type);
     event.dataTransfer.effectAllowed = 'move';
   };
   const onSearch = (value) => console.log(value);
@@ -21,7 +22,7 @@ const Sidebar = () => {
           className={['dndnode', node.type].join(' ')}
           draggable
           key={`${node.value}-${node.type}`}
-          onDragStart={(event) => onDragStart(event, node.type, node.label)}
+          onDragStart={(event) => onDragStart(event, node)}
         >
           <div className="dnd-node-label">{node.label}</div>
         </div>

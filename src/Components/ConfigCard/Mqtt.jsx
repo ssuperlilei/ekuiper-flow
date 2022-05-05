@@ -36,11 +36,6 @@ const Mqtt = () => {
         <Form.Item label="Topic" name="topic">
           <Input />
         </Form.Item>
-        <Form.Item wrapperCol={{ span: 24 }}>
-          <Button type="primary" htmlType="submit">
-            保存
-          </Button>
-        </Form.Item>
       </Form>
     </div>
   );
