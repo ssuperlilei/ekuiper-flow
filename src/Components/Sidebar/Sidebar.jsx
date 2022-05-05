@@ -1,7 +1,7 @@
 import React from 'react';
 import './Sidebar.less';
 import { Input } from 'antd';
-import loadDndNodes from '../../Utils/loadDndNodes';
+import loadDndNodes from '../../utils/loadDndNodes';
 
 const { Search } = Input;
 
@@ -10,6 +10,7 @@ const Sidebar = () => {
     event.dataTransfer.setData('getNodeName', node.value);
     event.dataTransfer.setData('getNodeLabel', node.label);
     event.dataTransfer.setData('getNodeType', node.type);
+    event.dataTransfer.setData('getNodeGroup', node.group);
     event.dataTransfer.effectAllowed = 'move';
   };
   const onSearch = (value) => console.log(value);

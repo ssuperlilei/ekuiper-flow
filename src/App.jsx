@@ -8,9 +8,9 @@ import ReactFlow, {
   Background,
   MiniMap,
 } from 'react-flow-renderer';
-import Sidebar from './Components/Sidebar/Sidebar';
-import ConfigCard from './Components/ConfigCard/ConfigCard';
-import loadData from './Utils/loadData';
+import Sidebar from './components/Sidebar/Sidebar';
+import ConfigCard from './components/ConfigCard/ConfigCard';
+import loadData from './utils/loadData';
 import './App.less';
 
 let id = 0;
@@ -65,6 +65,7 @@ const Flow = () => {
       const type = event.dataTransfer.getData('getNodeType');
       const name = event.dataTransfer.getData('getNodeName');
       const label = event.dataTransfer.getData('getNodeLabel');
+      const group = event.dataTransfer.getData('getNodeGroup');
       if (typeof type === 'undefined' || !type) {
         return;
       }
@@ -82,6 +83,7 @@ const Flow = () => {
           label: getLabel(label),
           name,
           configs: {},
+          nodeType: group,
         },
       };
       setNodes((nds) => nds.concat(newNode));

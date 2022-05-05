@@ -1,3 +1,5 @@
+import Schema from '../assets/Schema.json';
+
 const loadDndNodes = () => {
   const groups = [
     {
@@ -12,67 +14,30 @@ const loadDndNodes = () => {
       groupName: '自定义函数',
       groupValue: 'function',
     },
-    {
-      groupName: '图表展示',
-      groupValue: 'chart',
-    },
+    // {
+    //   groupName: '图表展示',
+    //   groupValue: 'chart',
+    // },
   ];
-  const dndNodes = [
-    {
-      label: 'ZeroMQ',
-      value: 'zmq',
-      type: 'input',
-      group: 'source',
-    },
-    {
-      label: 'MQTT',
-      value: 'mqtt',
-      type: 'input',
-      group: 'source',
-    },
-    {
-      label: 'MQTT',
-      value: 'mqtt',
-      type: 'output',
-      group: 'sink',
-    },
-    {
-      label: 'Log',
-      value: 'log',
-      type: 'output',
-      group: 'sink',
-    },
-    {
-      label: 'RMS 统计',
-      value: 'rms',
-      type: 'default',
-      group: 'function',
-    },
-    {
-      label: '滤波-IIR 滤波',
-      value: 'iir',
-      type: 'default',
-      group: 'function',
-    },
-    {
-      label: '频谱分析-功率谱',
-      value: 'spectrum',
-      type: 'default',
-      group: 'function',
-    },
-    {
-      label: '折线图',
-      value: 'line',
-      type: 'output',
-      group: 'chart',
-    },
-    {
-      label: '热力图',
-      value: 'heatmap',
-      type: 'output',
-      group: 'chart',
-    },
-  ];
+  const sourceDndNodes = Object.keys(Schema.source).map((key) => ({
+    value: key,
+    label: key,
+    type: 'input',
+    group: 'source',
+  }));
+  const sinkDndNodes = Object.keys(Schema.sink).map((key) => ({
+    value: key,
+    label: key,
+    type: 'output',
+    group: 'sink',
+  }));
+  const functionDndNodes = Object.keys(Schema.function).map((key) => ({
+    value: key,
+    label: key,
+    type: 'default',
+    group: 'function',
+  }));
+  const dndNodes = [...sourceDndNodes, ...sinkDndNodes, ...functionDndNodes];
   return {
     groups,
     dndNodes,
