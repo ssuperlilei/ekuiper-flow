@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
   addEdge,
@@ -14,16 +14,21 @@ import loadData from './Utils/loadData';
 import './App.less';
 
 let id = 0;
-const getId = () => `dndnode_${id++}`;
-
-const { initialEdges, initialNodes } = loadData();
+const getId = () => `node_${id++}`;
 
 const Flow = () => {
   const reactFlowWrapper = useRef(null);
   const [node, setNode] = useState(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  useEffect(() => {
+    return () => {
+      const { initialEdges, initialNodes } = loadData();
+      setNodes(initialNodes);
+      setEdges(initialEdges);
+    };
+  }, []);
   const getLabel = (label) => {
     return <div>{label}</div>;
   };
@@ -84,6 +89,11 @@ const Flow = () => {
     [reactFlowInstance],
   );
 
+  const saveNodes = () => {
+    console.log(nodes);
+    console.log(edges);
+  };
+
   return (
     <div className="flow-app">
       <ReactFlowProvider>
@@ -120,7 +130,7 @@ const Flow = () => {
             <Background color="#555B69" gap={16} />
           </ReactFlow>
         </div>
-        <ConfigCard node={node}></ConfigCard>
+        <ConfigCard node={node} save={saveNodes}></ConfigCard>
       </ReactFlowProvider>
     </div>
   );

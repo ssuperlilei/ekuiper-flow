@@ -1,22 +1,23 @@
 import React from 'react';
 import './ConfigCard.less';
-import MqttCard from './Mqtt';
+import SchemaForm from './SchemaForm';
 import { SaveOutlined, PlayCircleOutlined, UndoOutlined, RedoOutlined, CloudUploadOutlined } from '@ant-design/icons';
 
-const ConfigCard = ({ node }) => {
+const ConfigCard = ({ node, save }) => {
   const getConfigCard = () => {
     if (!node) return <div className="config-title">请选择节点进行配置</div>;
-    if (node.data.name === 'mqtt') {
-      return <MqttCard />;
-    } else {
-      return <div className="config-title">{node.data.label}</div>;
-    }
+    return (
+      <div>
+        <div className="config-title">{node.data.label}</div>
+        <SchemaForm node={node} />
+      </div>
+    );
   };
   const iconStyles = { fontSize: '20px' };
   return (
     <aside className="config-card">
       <div className="config-header">
-        <a>
+        <a onClick={save}>
           <SaveOutlined style={iconStyles} />
         </a>
         <a>
