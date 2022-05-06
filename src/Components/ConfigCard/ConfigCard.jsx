@@ -3,10 +3,9 @@ import './ConfigCard.less';
 import SchemaForm from './SchemaForm';
 import { SaveOutlined, PlayCircleOutlined, UndoOutlined, RedoOutlined, CloudUploadOutlined } from '@ant-design/icons';
 
-const ConfigCard = ({ node, save }) => {
+const ConfigCard = ({ node, save, upload, restore }) => {
   const [title, setTitle] = useState('');
   const [currNode, setCurrNode] = useState();
-  let schemaForm = null;
   useEffect(() => {
     if (!node) {
       setTitle('请选择节点进行配置');
@@ -22,13 +21,13 @@ const ConfigCard = ({ node, save }) => {
         <a onClick={save}>
           <SaveOutlined style={iconStyles} />
         </a>
-        <a>
+        <a onClick={upload}>
           <CloudUploadOutlined style={iconStyles} />
         </a>
         <a>
           <PlayCircleOutlined style={iconStyles} />
         </a>
-        <a>
+        <a onClick={restore}>
           <UndoOutlined style={iconStyles} />
         </a>
         <a>

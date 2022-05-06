@@ -64,14 +64,14 @@ const SchemaForm = ({ node }) => {
       return <p>暂无配置项</p>;
     }
     return (
-      <>
+      <div>
         {schemaFormItems}
         <Form.Item>
           <Button type="primary" size="small" htmlType="submit">
             保存
           </Button>
         </Form.Item>
-      </>
+      </div>
     );
   };
   const onFinish = (values) => {
