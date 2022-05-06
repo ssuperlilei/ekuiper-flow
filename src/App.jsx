@@ -109,6 +109,7 @@ const Flow = () => {
         setNodes(flow.nodes || []);
         setEdges(flow.edges || []);
         setViewport({ x, y, zoom });
+        message.success('恢复数据成功');
       }
     };
     restoreFlow();

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ConfigCard.less';
 import SchemaForm from './SchemaForm';
-import { SaveOutlined, PlayCircleOutlined, UndoOutlined, RedoOutlined, CloudUploadOutlined } from '@ant-design/icons';
+import { SaveOutlined, PlayCircleOutlined, RedoOutlined, CloudUploadOutlined } from '@ant-design/icons';
 
 const ConfigCard = ({ node, save, upload, restore }) => {
   const [title, setTitle] = useState('');
@@ -28,9 +28,6 @@ const ConfigCard = ({ node, save, upload, restore }) => {
           <PlayCircleOutlined style={iconStyles} />
         </a>
         <a onClick={restore}>
-          <UndoOutlined style={iconStyles} />
-        </a>
-        <a>
           <RedoOutlined style={iconStyles} />
         </a>
       </div>
