@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ConfigCard.less';
 import SchemaForm from './SchemaForm';
 import { SaveOutlined, PlayCircleOutlined, UndoOutlined, RedoOutlined, CloudUploadOutlined } from '@ant-design/icons';
 
 const ConfigCard = ({ node, save }) => {
-  const getConfigCard = () => {
-    if (!node) return <div className="config-title">请选择节点进行配置</div>;
-    return (
-      <div>
-        <div className="config-title">{node.data.label}</div>
-        <SchemaForm node={node} />
-      </div>
-    );
-  };
+  const [title, setTitle] = useState('');
+  const [currNode, setCurrNode] = useState();
+  let schemaForm = null;
+  useEffect(() => {
+    if (!node) {
+      setTitle('请选择节点进行配置');
+    } else {
+      setTitle(node.data.label);
+      setCurrNode(node);
+    }
+  });
   const iconStyles = { fontSize: '20px' };
   return (
     <aside className="config-card">
@@ -33,7 +35,10 @@ const ConfigCard = ({ node, save }) => {
           <RedoOutlined style={iconStyles} />
         </a>
       </div>
-      <div className="config-body">{getConfigCard()}</div>
+      <div className="config-body">
+        <div className="config-title">{title}</div>
+        <SchemaForm node={currNode} />
+      </div>
     </aside>
   );
 };
