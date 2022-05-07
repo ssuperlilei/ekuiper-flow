@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, Switch, InputNumber, message } from 'antd';
-import Schema from '../../assets/Schema.json';
+import Schema from '../../assets/Properties.json';
 import _ from 'lodash';
 import TextArea from 'antd/lib/input/TextArea';
 

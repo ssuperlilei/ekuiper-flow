@@ -1,19 +1,25 @@
-const uploadNodes = (nodes, edges) => {
-  // nodes
-  const _nodes = {};
-  const tranType = ({ name, nodeType }) => {
-    let _type = nodeType;
-    let _nodeType = nodeType;
-    if (nodeType === 'function') {
-      _type = 'operator';
-    } else {
-      _nodeType = name;
-    }
-    return {
-      _type,
-      _nodeType,
-    };
+const tranType = ({ name, nodeType }) => {
+  let _type = nodeType;
+  let _nodeType = nodeType;
+  if (nodeType === 'function') {
+    _type = 'operator';
+  } else {
+    _nodeType = name;
+  }
+  return {
+    _type,
+    _nodeType,
   };
+};
+
+const findNodeName = (id, nodes) => {
+  const node = nodes.find((node) => node.id === id);
+  return node.data.name;
+};
+
+// 序列化 Nodes
+const serialisedNodes = (nodes) => {
+  const _nodes = [];
   nodes.forEach((node) => {
     const { data, ...otherInfo } = node;
     const { name, configs } = data;
@@ -27,8 +33,44 @@ const uploadNodes = (nodes, edges) => {
       },
     };
   });
+  return _nodes;
+};
+// 序列化 Edges
+const serialisedEdges = (edges, nodes) => {
+  const allSources = edges.map((edge) => edge.source);
+  const allTargets = edges.map((edge) => edge.target);
+  const sourceNodeIds = _.uniq(
+    allSources.filter((source) => {
+      return !allTargets.includes(source);
+    }),
+  );
+  const _sources = sourceNodeIds.map((nodeId) => findNodeName(nodeId, nodes));
+  const _edges = {};
+  edges.forEach((edge) => {
+    const { source, target } = edge;
+    const sourceName = findNodeName(source, nodes);
+    const targetName = findNodeName(target, nodes);
+    if (_edges[sourceName] !== undefined && Array.isArray(_edges[sourceName])) {
+      _edges[sourceName].push(targetName);
+    } else {
+      _edges[sourceName] = [targetName];
+    }
+  });
+  return {
+    _sources,
+    _edges,
+  };
+};
+
+const uploadNodes = (nodes, edges) => {
+  // nodes
+  const _nodes = serialisedNodes(nodes);
   // edges
-  const _topo = {};
+  const { _sources, _edges } = serialisedEdges(edges, nodes);
+  const _topo = {
+    sources: _sources,
+    edges: _edges,
+  };
   const data = {
     id: 'rule1',
     name: '规则ui',
@@ -37,6 +79,7 @@ const uploadNodes = (nodes, edges) => {
       topo: _topo,
     },
   };
+  console.log(data);
 };
 
 export default uploadNodes;

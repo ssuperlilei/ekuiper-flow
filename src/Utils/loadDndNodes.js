@@ -1,4 +1,4 @@
-import Schema from '../assets/Schema.json';
+import Schema from '../assets/Properties.json';
 
 const loadDndNodes = () => {
   const groups = [
