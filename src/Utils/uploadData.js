@@ -1,3 +1,6 @@
+import { message } from 'antd';
+import axios from 'axios';
+
 const tranType = ({ name, nodeType }) => {
   let _type = nodeType;
   let _nodeType = nodeType;
@@ -19,7 +22,7 @@ const findNodeName = (id, nodes) => {
 
 // 序列化 Nodes
 const serialisedNodes = (nodes) => {
-  const _nodes = [];
+  const _nodes = {};
   nodes.forEach((node) => {
     const { data, ...otherInfo } = node;
     const { name, configs } = data;
@@ -62,7 +65,7 @@ const serialisedEdges = (edges, nodes) => {
   };
 };
 
-const uploadNodes = (nodes, edges) => {
+const uploadNodes = async (nodes, edges) => {
   // nodes
   const _nodes = serialisedNodes(nodes);
   // edges
@@ -79,7 +82,14 @@ const uploadNodes = (nodes, edges) => {
       topo: _topo,
     },
   };
-  console.log(data);
+  console.log(JSON.stringify(data));
+  try {
+    const res = await axios.post('http://127.0.0.1:9081/rules', data);
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+    message.error(error.response.data);
+  }
 };
 
 export default uploadNodes;
