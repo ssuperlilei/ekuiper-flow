@@ -14,10 +14,10 @@ const loadDndNodes = () => {
       groupName: '自定义函数',
       groupValue: 'function',
     },
-    // {
-    //   groupName: '图表展示',
-    //   groupValue: 'chart',
-    // },
+    {
+      groupName: '图表展示',
+      groupValue: 'chart',
+    },
   ];
   const sourceDndNodes = Object.keys(Schema.source).map((key) => ({
     value: key,
@@ -37,7 +37,21 @@ const loadDndNodes = () => {
     type: 'default',
     group: 'function',
   }));
-  const dndNodes = [...sourceDndNodes, ...sinkDndNodes, ...functionDndNodes];
+  const chartDndNodes = [
+    {
+      value: 'line',
+      label: '折线图',
+      type: 'output',
+      group: 'chart',
+    },
+    {
+      value: 'bar',
+      label: '柱状图',
+      type: 'output',
+      group: 'chart',
+    },
+  ];
+  const dndNodes = [...sourceDndNodes, ...sinkDndNodes, ...functionDndNodes, ...chartDndNodes];
   return {
     groups,
     dndNodes,

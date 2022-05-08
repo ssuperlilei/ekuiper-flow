@@ -338,5 +338,129 @@
         }
       ]
     }
+  },
+  "chart": {
+    "line": {
+      "about": {
+        "trial": true,
+        "installed": true,
+        "author": {
+          "name": "EMQ",
+          "email": "contact@emqx.io",
+          "company": "EMQ Technologies Co., Ltd",
+          "website": "https://www.emqx.io"
+        },
+        "helpUrl": {
+          "en": "https://github.com/lf-edge/ekuiper/blob/master/docs/en/plugins/sinks/zmq.md",
+          "zh": "https://github.com/lf-edge/ekuiper/blob/master/docs/zh/plugins/sinks/zmq.md"
+        },
+        "description": {
+          "en": "Line configuration",
+          "zh": "折线图配置"
+        }
+      },
+      "libs": null,
+      "properties": {
+        "default": [
+          {
+            "exist": false,
+            "name": "y",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": false,
+            "values": null,
+            "hint": { "en": "The url of the Zero Mq server", "zh": "Zero Mq 服务器的 URL" },
+            "label": { "en": "y-axis", "zh": "y-axis" }
+          },
+          {
+            "exist": false,
+            "name": "x",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": false,
+            "values": null,
+            "hint": { "en": "The url of the Zero Mq server", "zh": "Zero Mq 服务器的 URL" },
+            "label": { "en": "x-axis", "zh": "x-axis" }
+          },
+          {
+            "exist": false,
+            "name": "title",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": false,
+            "values": null,
+            "hint": { "en": "The url of the Zero Mq server", "zh": "Zero Mq 服务器的 URL" },
+            "label": { "en": "Title", "zh": "标题" }
+          }
+        ]
+      }
+    },
+    "bar": {
+      "about": {
+        "trial": true,
+        "installed": true,
+        "author": {
+          "name": "EMQ",
+          "email": "contact@emqx.io",
+          "company": "EMQ Technologies Co., Ltd",
+          "website": "https://www.emqx.io"
+        },
+        "helpUrl": {
+          "en": "https://github.com/lf-edge/ekuiper/blob/master/docs/en/plugins/sinks/zmq.md",
+          "zh": "https://github.com/lf-edge/ekuiper/blob/master/docs/zh/plugins/sinks/zmq.md"
+        },
+        "description": {
+          "en": "Bar configuration",
+          "zh": "柱状图配置"
+        }
+      },
+      "libs": null,
+      "properties": {
+        "default": [
+          {
+            "exist": false,
+            "name": "y",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": false,
+            "values": null,
+            "hint": { "en": "The url of the Zero Mq server", "zh": "Zero Mq 服务器的 URL" },
+            "label": { "en": "y-axis", "zh": "y-axis" }
+          },
+          {
+            "exist": false,
+            "name": "x",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": false,
+            "values": null,
+            "hint": { "en": "The url of the Zero Mq server", "zh": "Zero Mq 服务器的 URL" },
+            "label": { "en": "x-axis", "zh": "x-axis" }
+          },
+          {
+            "exist": false,
+            "name": "title",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": false,
+            "values": null,
+            "hint": { "en": "The url of the Zero Mq server", "zh": "Zero Mq 服务器的 URL" },
+            "label": { "en": "Title", "zh": "标题" }
+          }
+        ]
+      }
+    }
   }
 }

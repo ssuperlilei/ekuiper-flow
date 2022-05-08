@@ -86,6 +86,9 @@ const uploadNodes = async (nodes, edges) => {
   try {
     const res = await axios.post('http://127.0.0.1:9081/rules', data);
     console.log(res);
+    if (res.status === 201) {
+      message.success('规则上传成功');
+    }
   } catch (error) {
     console.log(error);
     message.error(error.response.data);
