@@ -17,8 +17,7 @@ import './App.less';
 import { message } from 'antd';
 
 const flowKey = 'ekuiper-flow';
-let id = 0;
-const getId = () => `node_${id++}`;
+const getId = () => `ekuiper_flow_${Math.random().toString(16).substr(2, 8)}`;
 
 const Flow = () => {
   const reactFlowWrapper = useRef(null);
