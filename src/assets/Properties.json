@@ -138,6 +138,18 @@
           },
           {
             "exist": false,
+            "name": "topic",
+            "default": null,
+            "type": "string",
+            "control": "text",
+            "connection_related": false,
+            "optional": true,
+            "values": null,
+            "hint": { "en": "The topic to publish to.", "zh": "订阅主题" },
+            "label": { "en": "Topic", "zh": "主题" }
+          },
+          {
+            "exist": false,
             "name": "clientid",
             "default": null,
             "type": "string",
@@ -210,6 +222,18 @@
               "zh": "控制是否跳过证书认证。如果被设置为 true，那么跳过证书认证；否则进行证书验证。"
             },
             "label": { "en": "Skip Certification verification", "zh": "跳过证书验证" }
+          },
+          {
+            "exist": false,
+            "name": "sendSingle",
+            "default": null,
+            "type": "bool",
+            "control": "radio",
+            "connection_related": false,
+            "optional": true,
+            "values": null,
+            "hint": { "en": "Sending Single", "zh": "将结果按条发送" },
+            "label": { "en": "Sending Single", "zh": "将结果按条发送" }
           }
         ]
       }
