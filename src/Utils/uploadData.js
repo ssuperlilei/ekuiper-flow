@@ -30,7 +30,7 @@ const serialisedNodes = (nodes) => {
     _nodes[name] = {
       type: _type,
       nodeType: _nodeType,
-      prop: {
+      props: {
         ...configs,
         meta: otherInfo,
       },
@@ -87,7 +87,7 @@ const uploadNodes = async (nodes, edges) => {
     const res = await axios.post('http://127.0.0.1:9081/rules', data);
     console.log(res);
     if (res.status === 201) {
-      message.success('规则上传成功');
+      message.success(res.data);
     }
   } catch (error) {
     console.log(error);
