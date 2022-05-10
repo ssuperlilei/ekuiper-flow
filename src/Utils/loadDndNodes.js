@@ -28,7 +28,7 @@ const loadDndNodes = () => {
   const sinkDndNodes = Object.keys(Schema.sink).map((key) => ({
     value: key,
     label: key,
-    type: 'output',
+    type: 'default',
     group: 'sink',
   }));
   const functionDndNodes = Object.keys(Schema.function).map((key) => ({
@@ -41,12 +41,6 @@ const loadDndNodes = () => {
     {
       value: 'line',
       label: '折线图',
-      type: 'output',
-      group: 'chart',
-    },
-    {
-      value: 'bar',
-      label: '柱状图',
       type: 'output',
       group: 'chart',
     },

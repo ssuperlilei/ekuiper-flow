@@ -15,18 +15,35 @@ const tranType = ({ name, nodeType }) => {
   };
 };
 
-const findNodeName = (id, nodes) => {
+const findNode = (id, nodes) => {
   const node = nodes.find((node) => node.id === id);
-  return node.data.name;
+  return node;
+};
+
+const findChartSources = (id, nodes, edges) => {
+  const chartsSources = [];
+  edges.forEach((edge) => {
+    if (edge.target === id) {
+      const edgeSourceNode = findNode(edge.source, nodes);
+      chartsSources.push(edgeSourceNode.data.name);
+    }
+  });
+  return chartsSources;
 };
 
 // 序列化 Nodes
-const serialisedNodes = (nodes) => {
+const serialisedNodes = (nodes, edges) => {
   const _nodes = {};
+  const chartNodes = [];
   nodes.forEach((node) => {
     const { data, ...otherInfo } = node;
     const { name, configs } = data;
     const { _type, _nodeType } = tranType(data);
+    // Don't add chart node
+    if (_type === 'chart') {
+      chartNodes.push(node);
+      return;
+    }
     _nodes[name] = {
       type: _type,
       nodeType: _nodeType,
@@ -35,6 +52,15 @@ const serialisedNodes = (nodes) => {
         meta: otherInfo,
       },
     };
+  });
+  // Set the visualization to sink node
+  chartNodes.forEach((chartNode) => {
+    const chartsSources = findChartSources(chartNode.id, nodes, edges);
+    chartsSources.forEach((chartSource) => {
+      if (_nodes[chartSource]) {
+        _nodes[chartSource].props.visualization = chartNode;
+      }
+    });
   });
   return _nodes;
 };
@@ -47,12 +73,21 @@ const serialisedEdges = (edges, nodes) => {
       return !allTargets.includes(source);
     }),
   );
-  const _sources = sourceNodeIds.map((nodeId) => findNodeName(nodeId, nodes));
+  const _sources = sourceNodeIds.map((nodeId) => {
+    const currNode = findNode(nodeId, nodes);
+    return currNode.data.name;
+  });
   const _edges = {};
   edges.forEach((edge) => {
     const { source, target } = edge;
-    const sourceName = findNodeName(source, nodes);
-    const targetName = findNodeName(target, nodes);
+    const sourceNode = findNode(source, nodes);
+    const targetNode = findNode(target, nodes);
+    const sourceName = sourceNode.data.name;
+    const targetName = targetNode.data.name;
+    // Don't add chart node
+    if (targetNode.data.nodeType === 'chart') {
+      return;
+    }
     if (_edges[sourceName] !== undefined && Array.isArray(_edges[sourceName])) {
       _edges[sourceName].push(targetName);
     } else {
@@ -67,7 +102,7 @@ const serialisedEdges = (edges, nodes) => {
 
 const uploadNodes = async (nodes, edges) => {
   // nodes
-  const _nodes = serialisedNodes(nodes);
+  const _nodes = serialisedNodes(nodes, edges);
   // edges
   const { _sources, _edges } = serialisedEdges(edges, nodes);
   const _topo = {
@@ -82,15 +117,13 @@ const uploadNodes = async (nodes, edges) => {
       topo: _topo,
     },
   };
-  console.log(JSON.stringify(data));
+  console.log(data);
   try {
     const res = await axios.post('http://127.0.0.1:9081/rules', data);
-    console.log(res);
     if (res.status === 201) {
       message.success(res.data);
     }
   } catch (error) {
-    console.log(error);
     message.error(error.response.data);
   }
 };
