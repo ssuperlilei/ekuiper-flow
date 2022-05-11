@@ -111,6 +111,9 @@ const Flow = () => {
   }, [setNodes, setViewport]);
 
   const uploadNodes = () => {
+    const flow = reactFlowInstance.toObject();
+    // TO DO, save viewport on API
+    console.log(flow.viewport);
     uploadData(nodes, edges);
   };
 
