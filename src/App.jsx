@@ -11,10 +11,11 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 import Sidebar from './components/Sidebar/Sidebar';
 import ConfigCard from './components/ConfigCard/ConfigCard';
-import loadData from './utils/loadData';
+import handleNodes from './utils/handleNodes';
 import uploadData from './utils/uploadData';
 import './App.less';
 import { message } from 'antd';
+import useFetchNodes from './hooks/useFetchNodes';
 
 const flowKey = 'ekuiper-flow';
 const getId = () => `ekuiper_flow_${Math.random().toString(16).substr(2, 8)}`;
@@ -22,17 +23,12 @@ const getId = () => `ekuiper_flow_${Math.random().toString(16).substr(2, 8)}`;
 const Flow = () => {
   const reactFlowWrapper = useRef(null);
   const [node, setNode] = useState(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const { setViewport } = useReactFlow();
-  useEffect(() => {
-    return () => {
-      const { initialEdges, initialNodes } = loadData();
-      setNodes(initialNodes);
-      setEdges(initialEdges);
-    };
-  }, []);
+  const { apiData } = useFetchNodes('ekuiper_flow_rule');
+  const { initialEdges, initialNodes } = handleNodes(apiData && apiData.data);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
   const getSourcePosition = (type) => {
     if (type === 'output') {
       return undefined;

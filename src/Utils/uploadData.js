@@ -1,5 +1,6 @@
 import { message } from 'antd';
 import axios from 'axios';
+import apiConfig from '../config/apiConfig';
 
 const tranType = ({ name, nodeType }) => {
   let _type = nodeType;
@@ -101,6 +102,8 @@ const serialisedEdges = (edges, nodes) => {
 };
 
 const uploadNodes = async (nodes, edges) => {
+  console.log(nodes);
+  console.log(edges);
   // nodes
   const _nodes = serialisedNodes(nodes, edges);
   // edges
@@ -110,16 +113,16 @@ const uploadNodes = async (nodes, edges) => {
     edges: _edges,
   };
   const data = {
-    id: 'rule1',
+    id: 'ekuiper_flow_rule',
     name: '规则ui',
     graph: {
       nodes: _nodes,
       topo: _topo,
     },
   };
-  console.log(data);
   try {
-    const res = await axios.post('http://127.0.0.1:9081/rules', data);
+    const url = apiConfig.url + apiConfig.rulePath;
+    const res = await axios.post(url, data);
     if (res.status === 201) {
       message.success(res.data);
     }
