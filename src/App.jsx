@@ -27,8 +27,12 @@ const Flow = () => {
   const { setViewport } = useReactFlow();
   const { apiData } = useFetchNodes('ekuiper_flow_rule');
   const { initialEdges, initialNodes } = handleNodes(apiData && apiData.data);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  useEffect(() => {
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+  }, [apiData]);
   const getSourcePosition = (type) => {
     if (type === 'output') {
       return undefined;
@@ -95,18 +99,17 @@ const Flow = () => {
       message.success('本地保存成功');
     }
   }, [reactFlowInstance]);
-
+  const restoreFlow = async () => {
+    const flow = JSON.parse(localStorage.getItem(flowKey));
+    if (flow) {
+      const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+      setNodes(flow.nodes || []);
+      setEdges(flow.edges || []);
+      setViewport({ x, y, zoom });
+      message.success('恢复数据成功');
+    }
+  };
   const onRestore = useCallback(() => {
-    const restoreFlow = async () => {
-      const flow = JSON.parse(localStorage.getItem(flowKey));
-      if (flow) {
-        const { x = 0, y = 0, zoom = 1 } = flow.viewport;
-        setNodes(flow.nodes || []);
-        setEdges(flow.edges || []);
-        setViewport({ x, y, zoom });
-        message.success('恢复数据成功');
-      }
-    };
     restoreFlow();
   }, [setNodes, setViewport]);
 
