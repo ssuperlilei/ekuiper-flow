@@ -25,7 +25,8 @@ const Flow = () => {
   const [node, setNode] = useState(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const { setViewport } = useReactFlow();
-  const { apiData } = useFetchNodes('ekuiper_flow_rule');
+  const ruleId = window.location.pathname.split('/')[2];
+  const { apiData } = useFetchNodes(ruleId);
   const { initialEdges, initialNodes } = handleNodes(apiData && apiData.data);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
