@@ -1,3 +1,5 @@
+import LineChart from '../components/Charts/Linechart';
+
 const getNodeType = (type) => {
   if (type === 'operator') {
     return 'function';
@@ -22,6 +24,7 @@ const deserializeNodes = (nodes, edges) => {
     _nodes.push(_node);
     // Handle Add chart node
     if (visualization) {
+      visualization.data.label = LineChart();
       _nodes.push(visualization);
       edges[key] = [visualization.data.name];
     }
