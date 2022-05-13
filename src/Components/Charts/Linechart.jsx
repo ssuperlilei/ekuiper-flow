@@ -1,10 +1,9 @@
 import { ResponsiveLine } from '@nivo/line';
 import { useState, useEffect } from 'react';
-import useFetchStatus from '../../hooks/useFetchStatus';
-import RealTimeChart from './RealTimeChart';
 import * as time from 'd3-time';
-import { timeFormat } from 'd3-time-format';
 import { range, last } from 'lodash';
+import axios from 'axios';
+import apiConfig from '../../config/apiConfig';
 
 const MyResponsiveLine = () => {
   const date = new Date();
@@ -16,8 +15,13 @@ const MyResponsiveLine = () => {
     y: 10 + Math.round(Math.random() * 20),
   }));
   const [data, setData] = useState(initData);
-  const formatTime = timeFormat('%Y %b %d');
-  const next = () => {
+  const next = async () => {
+    const res = await axios.get(`${apiConfig.url}/rules/ekuiper_flow_rule/status`);
+    if (res.data.sink_mqtt_0_output_data !== '') {
+      const sinkData = JSON.parse(res.data.sink_mqtt_0_output_data);
+      console.log('y-axis', sinkData[0]['butterworth']);
+      console.log('x-axis', sinkData[0]['timestamp']);
+    }
     const _data = data.slice(1);
     _data.push({
       x: time.timeMinute.offset(last(data).x, 30),
